@@ -11,10 +11,6 @@ class DataService {
         let fullUrl = URL(string: apiUrl + apiKey)
         
         URLSession.shared.dataTask(with: fullUrl!) { (data, response, error) in
-            if let httpResponse  = response as? HTTPURLResponse {
-                print("API status: \(httpResponse.statusCode)")
-            }
-            
             guard let validData = data, error == nil else {
                 completion(.failure(error!))
                 return

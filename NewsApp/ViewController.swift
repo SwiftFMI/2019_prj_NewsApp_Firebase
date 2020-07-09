@@ -12,7 +12,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Make cells reusables
-        print("tableView")
         let cell = tableView.dequeueReusableCell(withIdentifier: "normalCell", for: indexPath)
         
         let currentArticle = articlesManager.articles[indexPath.row]
@@ -27,8 +26,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("viewDidLoad")
-        self.title = "Main Controller"
         
         DataService.shared.getData { (result) in
             switch result {
