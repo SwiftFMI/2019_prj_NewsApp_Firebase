@@ -34,7 +34,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             switch result {
                 case .success(let articles) :
                     for articleJson in articles {
-                        self.articlesManager.articles.append(Article(articleJson.title, articleJson.url))
+                        self.articlesManager.articles.append(Article(articleJson.title, articleJson.description))
                     }
                     self.tableView.reloadData() // TODO: should be called from main thread
                 case .failure(let error):
