@@ -21,8 +21,8 @@ class DataService {
             }
             
             do {
-                let gists = try JSONDecoder().decode(Gist.self, from: validData)
-                completion(.success(gists.articles))
+                let gist = try JSONDecoder().decode(Gist.self, from: validData)
+                completion(.success(gist.articles))
             } catch let serializationError {
                 completion(.failure(serializationError))    
             }

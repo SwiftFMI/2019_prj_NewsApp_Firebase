@@ -2,6 +2,8 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var tableView: UITableView!
+    
     let articlesManager = ArticlesManager()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -31,13 +33,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         DataService.shared.getData { (result) in
             switch result {
                 case .success(let articles) :
-                    for article in articles {
-                        self.articlesManager.articles.append(Article(article.title, article.url))
+                    for articleJson in articles {
+                        self.articlesManager.articles.append(Article(articleJson.title, articleJson.url))
                     }
+                    self.tableView.reloadData() // TODO: should be called from main thread
                 case .failure(let error):
                     print(error)
             }
-            
         }
     }
     
