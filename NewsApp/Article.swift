@@ -11,5 +11,4 @@ class Article {
         self.title = title
         self.description = description
     }
-    
 }
