@@ -6,31 +6,52 @@ import FirebaseAuth
 class UsersManager: NSObject {
     
     static let db = Database.database().reference()
-    static let uid = Auth.auth().currentUser?.uid
     
     static var users = [User]()
     
-    static func getCurrentUser(uid: String) -> User? {
-        if let idx = users.lastIndex(where: {$0.uid == uid}) {
-            return users[idx]
-        }
-        return nil
+    static var currentUser: User? = nil
+    
+    static func login(email: String, password: String, completion: @escaping (_ success: Bool) -> Void) {
+        Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(false)
+            } else {
+                completion(true)
+            }
+        })
     }
     
-    static func fillUsers(completion: @escaping () -> Void) {
-        users = []
-        db.child("Users").observe(.childAdded) { (snapshot) in
-            print(snapshot)
-            if let result = snapshot.value as? [String:AnyObject] {
-                let uid = result["uid"] as! String
-                let email = result["email"] as! String
-                
-                let user = User(email: email, uid: uid)
-                UsersManager.users.append(user)
+    static func register(email: String, password: String, completion: @escaping(_ result: String) -> Void) {
+        Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
             }
-            completion()
+            addUser(email: email)
+            login(email: email, password: password, completion: { (success: Bool) in
+                if success {
+                    print("Loging successfull after account creation")
+                } else {
+                    print("Loging unsuccessfull after account creation")
+                }
+            })
+            completion("")
+        })
+    }
+    
+    static func addUser(email: String) {
+        let uid = Auth.auth().currentUser?.uid
+        let user = ["uid" : uid!, "email" : email]
+        db.child("users").child(uid!).setValue(user)
+    }
+    
+    static func logout() {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print("Log out error")
         }
-        
     }
     
 }

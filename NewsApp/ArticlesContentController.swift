@@ -6,7 +6,5 @@ class ArticlesContentController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("-------------------", selectedArticle?.title)
     }
 }

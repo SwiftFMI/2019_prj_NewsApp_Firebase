@@ -2,15 +2,51 @@ import UIKit
 
 class MainController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
     
-    var filteredArticles: [Article] = []
-    
     @IBOutlet weak var tableView: UITableView!
     
     let searchController = UISearchController(searchResultsController: nil)
     
     let articlesManager = ArticlesManager()
     
+    var filteredArticles: [Article] = []
+    
     var selectedArticle: Article?
+
+    var isSearchBarEmpty: Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    var isFiltering: Bool {
+        return searchController.isActive && !isSearchBarEmpty
+    }
+
+    @IBAction func logout_click(_ sender: Any) {
+        UsersManager.logout()
+        self.performSegue(withIdentifier: "logoutSegue", sender: self)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        DataService.shared.getData { (result) in
+            switch result {
+                case .success(let articles) :
+                    for articleJson in articles {
+                        let article = Article(articleJson.title, articleJson.author, articleJson.description, articleJson.content, articleJson.urlToImage)
+                        self.articlesManager.articles.append(article)
+                    }
+                case .failure(let error):
+                    print(error)
+            }
+            
+            
+            DispatchQueue.main.sync {
+                self.tableView.reloadData()
+            }
+        }
+        
+        setupSearchBar()
+    }
     
     // SEARCH BAR
     
@@ -26,14 +62,16 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         tableView.reloadData()
     }
-
-    var isSearchBarEmpty: Bool {
-        return searchController.searchBar.text?.isEmpty ?? true
+    
+    func setupSearchBar() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
     
-    var isFiltering: Bool {
-        return searchController.isActive && !isSearchBarEmpty
-    }
+    // TABLE VIEW
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {
@@ -61,7 +99,7 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // Download image
         if currentArticle.urlToImage != "" {
-
+            
             let imageUrl = URL(string: currentArticle.urlToImage)!
             let session = URLSession(configuration: .default)
             let _ = session.dataTask(with: imageUrl) { (data, response, error) in
@@ -75,8 +113,8 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
                             // Finally convert that Data into an image and do what you wish with it.
                             let image = UIImage(data: imageData)
                             cell.imageView?.image = image
-//                            cell.imageView?.contentMode = .scaleToFill
-//                            cell.imageView?.clipsToBounds = true
+                            //                            cell.imageView?.contentMode = .scaleToFill
+                            //                            cell.imageView?.clipsToBounds = true
                         } else {
                             print("Couldn't get image: Image is nil")
                         }
@@ -84,7 +122,7 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
                         print("Couldn't get response code for some reason")
                     }
                 }
-            }.resume()
+                }.resume()
         }
         
         return cell
@@ -98,41 +136,8 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showContent",
             let destinationViewController = segue.destination as? ArticlesContentController {
-                destinationViewController.selectedArticle = selectedArticle
+            destinationViewController.selectedArticle = selectedArticle
         }
-    }
-    
-
-    @IBAction func logout_click(_ sender: Any) {
-        FirebaseManager.logout()
-        self.performSegue(withIdentifier: "logoutSegue", sender: self)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        DataService.shared.getData { (result) in
-            switch result {
-                case .success(let articles) :
-                    for articleJson in articles {
-                        let article = Article(articleJson.title, articleJson.author, articleJson.description, articleJson.content, articleJson.urlToImage)
-                        self.articlesManager.articles.append(article)
-                    }
-                case .failure(let error):
-                    print(error)
-            }
-            
-            
-            DispatchQueue.main.sync {
-                self.tableView.reloadData()
-            }
-        }
-        
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search"
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
     }
 }
 
