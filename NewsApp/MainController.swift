@@ -46,11 +46,13 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
             switch result {
                 case .success(let articles) :
                     for articleJson in articles {
-                        self.articlesManager.articles.append(Article(articleJson.title, articleJson.description))
+                        let article = Article(articleJson.title, articleJson.author, articleJson.description, articleJson.content, articleJson.urlToImage)
+                        self.articlesManager.articles.append(article)
                     }
                 case .failure(let error):
                     print(error)
             }
+            
             
             DispatchQueue.main.sync {
                 self.tableView.reloadData()
@@ -58,6 +60,5 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
     }
-    
 }
 
