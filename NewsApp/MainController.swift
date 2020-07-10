@@ -1,14 +1,44 @@
 import UIKit
 
-class MainController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MainController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
+    
+    var filteredArticles: [Article] = []
     
     @IBOutlet weak var tableView: UITableView!
+    
+    let searchController = UISearchController(searchResultsController: nil)
     
     let articlesManager = ArticlesManager()
     
     var selectedArticle: Article?
     
+    // SEARCH BAR
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        filterContentForSearchText(searchBar.text!)
+    }
+    
+    func filterContentForSearchText(_ searchText: String) {
+        filteredArticles = articlesManager.articles.filter { (article: Article) -> Bool in
+            return article.title.lowercased().contains(searchText.lowercased())
+        }
+        
+        tableView.reloadData()
+    }
+
+    var isSearchBarEmpty: Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    var isFiltering: Bool {
+        return searchController.isActive && !isSearchBarEmpty
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering {
+            return filteredArticles.count
+        }
         return articlesManager.articles.count
     }
     
@@ -16,7 +46,13 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Make cells reusables
         let cell = tableView.dequeueReusableCell(withIdentifier: "normalCell", for: indexPath)
         
-        let currentArticle = articlesManager.articles[indexPath.row]
+        let currentArticle: Article
+        
+        if isFiltering {
+            currentArticle = filteredArticles[indexPath.row]
+        } else {
+            currentArticle = articlesManager.articles[indexPath.row]
+        }
         
         cell.imageView?.image = UIImage.init(named: "Article")
         cell.accessoryType = .disclosureIndicator
@@ -92,6 +128,11 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
         
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
 }
 

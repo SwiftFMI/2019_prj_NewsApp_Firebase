@@ -93,12 +93,14 @@
 		8B1B3ABD24B3D0BE0054C674 /* NewsApp */ = {
 			isa = PBXGroup;
 			children = (
+				8B1B3AC024B3D0BE0054C674 /* MainController.swift */,
+				8B1BD9BE24B504DC008AE114 /* ArticlesContentController.swift */,
+				8BF8C14524B7D3C200BA0A10 /* RegistrationController.swift */,
+				8BF8C14724B7D43200BA0A10 /* LoginController.swift */,
 				8B585EBB24B7CF8000912532 /* NewsApp.entitlements */,
 				8B1B3ABE24B3D0BE0054C674 /* AppDelegate.swift */,
-				8B1B3AC024B3D0BE0054C674 /* MainController.swift */,
 				8B1BD9C224B524CE008AE114 /* ArticlesManager.swift */,
 				8B1B3AC224B3D0BE0054C674 /* Main.storyboard */,
-				8B1BD9BE24B504DC008AE114 /* ArticlesContentController.swift */,
 				8B1B3AC524B3D0C00054C674 /* Assets.xcassets */,
 				8B1B3AC724B3D0C00054C674 /* LaunchScreen.storyboard */,
 				8B1B3ACA24B3D0C00054C674 /* Info.plist */,
@@ -106,8 +108,6 @@
 				8BAB342424B77620006F26E4 /* DataService.swift */,
 				8BAB342624B7906C006F26E4 /* Gist.swift */,
 				8B06E3D824B7CB0400EE2113 /* GoogleService-Info.plist */,
-				8BF8C14524B7D3C200BA0A10 /* RegistrationController.swift */,
-				8BF8C14724B7D43200BA0A10 /* LoginController.swift */,
 				8B642C9924B7D8270014C2DE /* FirebaseManager.swift */,
 				8B642C9B24B7DBE20014C2DE /* User.swift */,
 				8B642C9D24B7DC830014C2DE /* UsersManager.swift */,
