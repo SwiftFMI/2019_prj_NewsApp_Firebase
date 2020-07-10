@@ -23,6 +23,34 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.detailTextLabel?.text = currentArticle.description
         cell.textLabel?.text = currentArticle.title
         
+        // Download image
+        if currentArticle.urlToImage != "" {
+
+            let imageUrl = URL(string: currentArticle.urlToImage)!
+            let session = URLSession(configuration: .default)
+            let _ = session.dataTask(with: imageUrl) { (data, response, error) in
+                // The download has finished.
+                if let e = error {
+                    print("Error downloading cat picture: \(e)")
+                } else {
+                    if let res = response as? HTTPURLResponse {
+                        print("Downloaded picture with response code \(res.statusCode)")
+                        if let imageData = data {
+                            // Finally convert that Data into an image and do what you wish with it.
+                            let image = UIImage(data: imageData)
+                            cell.imageView?.image = image
+//                            cell.imageView?.contentMode = .scaleToFill
+//                            cell.imageView?.clipsToBounds = true
+                        } else {
+                            print("Couldn't get image: Image is nil")
+                        }
+                    } else {
+                        print("Couldn't get response code for some reason")
+                    }
+                }
+            }.resume()
+        }
+        
         return cell
     }
     
