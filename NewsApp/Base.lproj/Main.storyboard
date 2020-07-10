@@ -150,7 +150,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8XK-94-kid">
-                                <rect key="frame" x="20" y="370" width="374" height="30"/>
+                                <rect key="frame" x="21" y="370" width="374" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -162,6 +162,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="JR1-Pg-V4X"/>
                     <connections>
+                        <outlet property="email" destination="8XK-94-kid" id="snF-WT-dEU"/>
+                        <outlet property="password" destination="TZc-gq-xZE" id="yXk-hc-qtg"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="loginSegue" id="gPx-sj-4HW"/>
                     </connections>
                 </viewController>
@@ -192,7 +194,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Rq-ed-EvR">
-                                <rect key="frame" x="20" y="408" width="374" height="30"/>
+                                <rect key="frame" x="20" y="407" width="374" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -202,15 +204,27 @@
                                 <rect key="frame" x="20" y="460" width="374" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Register"/>
+                                <connections>
+                                    <action selector="register_click:" destination="m4k-4Z-Pra" eventType="touchUpInside" id="nag-6g-Kkj"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="registerSegue" id="sJN-VZ-Yf5"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="85o-1K-9ci"/>
                     </view>
+                    <connections>
+                        <outlet property="confirmPassword" destination="7Rq-ed-EvR" id="38p-lw-PLR"/>
+                        <outlet property="email" destination="raJ-rd-DvG" id="Rrj-xl-50m"/>
+                        <outlet property="password" destination="m1U-yc-1tb" id="qYV-G5-1Ft"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hMH-t6-Zsu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="257.97101449275362" y="799.55357142857144"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="sJN-VZ-Yf5"/>
+    </inferredMetricsTieBreakers>
 </document>
