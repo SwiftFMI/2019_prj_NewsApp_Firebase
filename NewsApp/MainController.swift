@@ -36,7 +36,12 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
             let destinationViewController = segue.destination as? ArticlesContentController {
                 destinationViewController.selectedArticle = selectedArticle
         }
-        // TODO: register segue
+    }
+    
+
+    @IBAction func logout_click(_ sender: Any) {
+        FirebaseManager.logout()
+        self.performSegue(withIdentifier: "logoutSegue", sender: self)
     }
     
     override func viewDidLoad() {

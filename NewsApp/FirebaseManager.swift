@@ -45,4 +45,12 @@ class FirebaseManager: NSObject {
         let user = ["uid" : uid!, "email" : email]
         db.child("users").child(uid!).setValue(user)
     }
+    
+    static func logout() {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print("Log out error")
+        }
+    }
 }

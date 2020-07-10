@@ -61,7 +61,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="6GS-JJ-sHd"/>
+                    <navigationItem key="navigationItem" id="6GS-JJ-sHd">
+                        <barButtonItem key="rightBarButtonItem" title="Sign out" id="hpx-hv-OSX">
+                            <connections>
+                                <action selector="logout_click:" destination="BYZ-38-t0r" id="JJl-RK-ddk"/>
+                                <segue destination="Fdu-J7-G0P" kind="show" identifier="logoutSegue" id="vH3-40-MDA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="lSu-RP-SWn" id="lU0-th-cIK"/>
                     </connections>
@@ -225,6 +232,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="sJN-VZ-Yf5"/>
+        <segue reference="vH3-40-MDA"/>
+        <segue reference="gPx-sj-4HW"/>
     </inferredMetricsTieBreakers>
 </document>
