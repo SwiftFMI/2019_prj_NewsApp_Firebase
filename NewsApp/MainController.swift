@@ -32,7 +32,7 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
             switch result {
                 case .success(let articles) :
                     for articleJson in articles {
-                        let article = Article(articleJson.title, articleJson.author, articleJson.description, articleJson.content, articleJson.urlToImage)
+                        let article = Article(articleJson.title, articleJson.author, articleJson.description, articleJson.content, articleJson.urlToImage, articleJson.url)
                         self.articlesManager.articles.append(article)
                     }
                 case .failure(let error):
@@ -98,6 +98,7 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.textLabel?.text = currentArticle.title
         
         // Download image
+        // TODO: Code duplication (ArticlesContentController)
         if currentArticle.urlToImage != "" {
             
             let imageUrl = URL(string: currentArticle.urlToImage)!
@@ -130,7 +131,15 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedArticle = articlesManager.articles[indexPath.row]
-        self.performSegue(withIdentifier: "showContent", sender: self)
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let favorite = UITableViewRowAction(style: .normal, title: "Save") { action, index in
+            print("favorite button tapped")
+        }
+        favorite.backgroundColor = .orange
+        
+        return [favorite]
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
