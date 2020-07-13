@@ -32,7 +32,7 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
             switch result {
                 case .success(let articles) :
                     for articleJson in articles {
-                        let article = Article(articleJson.title, articleJson.author, articleJson.description, articleJson.content, articleJson.urlToImage, articleJson.url)
+                        let article = Article(articleJson.title, articleJson.author, articleJson.description, articleJson.content, articleJson.urlToImage, articleJson.url, articleJson.publishedAt)
                         self.articlesManager.articles.append(article)
                     }
                 case .failure(let error):
@@ -104,18 +104,15 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
             let imageUrl = URL(string: currentArticle.urlToImage)!
             let session = URLSession(configuration: .default)
             let _ = session.dataTask(with: imageUrl) { (data, response, error) in
-                // The download has finished.
                 if let e = error {
                     print("Error downloading cat picture: \(e)")
                 } else {
                     if let res = response as? HTTPURLResponse {
                         print("Downloaded picture with response code \(res.statusCode)")
                         if let imageData = data {
-                            // Finally convert that Data into an image and do what you wish with it.
                             let image = UIImage(data: imageData)
+                            cell.imageView?.clipsToBounds = true
                             cell.imageView?.image = image
-                            //                            cell.imageView?.contentMode = .scaleToFill
-                            //                            cell.imageView?.clipsToBounds = true
                         } else {
                             print("Couldn't get image: Image is nil")
                         }
