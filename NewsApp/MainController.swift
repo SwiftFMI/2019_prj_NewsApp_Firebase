@@ -39,7 +39,6 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
                     print(error)
             }
             
-            
             DispatchQueue.main.sync {
                 self.tableView.reloadData()
             }

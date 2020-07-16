@@ -54,6 +54,8 @@ class ArticlesContentController: UIViewController {
     }
     
     @IBAction func saveClick(_ sender: Any) {
+        let articleId = selectedArticle!.title.prefix(3) + selectedArticle!.url.suffix(5)
+        DbManager.dbManager.addArticle(article: [String(articleId): selectedArticle!])
     }
     
 }
