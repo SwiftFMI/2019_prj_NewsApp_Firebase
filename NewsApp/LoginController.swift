@@ -13,7 +13,9 @@ class LoginController: UIViewController {
     @IBAction func login_click(_ sender: Any) {
         UsersManager.login(email: email.text!, password: password.text!) { (success: Bool) in
             if success {
-                self.performSegue(withIdentifier: "loginSegue", sender: sender)
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let mainTabBarController = storyboard.instantiateViewController(withIdentifier: Constants.instance.mainTabBarId)
+                (UIApplication.shared.delegate as? AppDelegate)?.changeRootViewController(mainTabBarController)
             } else {
                 print()
             }
