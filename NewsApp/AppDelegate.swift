@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  NewsApp
-//
-//  Created by Nikoleta Yankova on 7.07.20.
-//  Copyright © 2020 Nikoleta Yankova. All rights reserved.
-//
-
 import UIKit
 import CoreData
 import Firebase
@@ -20,12 +12,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Firebase configuration
         FirebaseApp.configure()
         
+        // Keep user logged in
+
+        // Keep user logged in
+        let storyboard = UIStoryboard(name: Constants.StoryBoardNames.main, bundle: nil)
+        let isUserLoggedInStatus = UserDefaults.standard.bool(forKey: Constants.UserDefaultsKeys.isUserLoggedIn)
         // Navigations
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let _ = UserDefaults.standard.string(forKey: "username") {
-            window?.rootViewController = storyboard.instantiateViewController(withIdentifier: Constants.instance.mainTabBarId)
+        if isUserLoggedInStatus {
+            window?.rootViewController = storyboard.instantiateViewController(withIdentifier: Constants.ViewControllerIdentifiers.mainTabBarId)
         } else {
-            window?.rootViewController = storyboard.instantiateViewController(withIdentifier: Constants.instance.loginNavigationControllerId)
+            window?.rootViewController = storyboard.instantiateViewController(withIdentifier: Constants.ViewControllerIdentifiers.loginNavigationControllerId)
         }
         
         return true

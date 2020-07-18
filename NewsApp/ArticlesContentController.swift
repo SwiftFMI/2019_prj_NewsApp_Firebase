@@ -22,15 +22,14 @@ class ArticlesContentController: UIViewController {
         publishedAt.text = String(selectedArticle?.publishedAt.prefix(10) ?? "Published at" )
         
         if selectedArticle?.urlToImage != nil {
-            
+            // TODO: code duplication
             let imageUrl = URL(string: selectedArticle!.urlToImage)!
             let session = URLSession(configuration: .default)
             let _ = session.dataTask(with: imageUrl) { (data, response, error) in
                 if let e = error {
-                    print("Error downloading cat picture: \(e)")
+                    print("Error downloading picture: \(e)")
                 } else {
                     if let res = response as? HTTPURLResponse {
-                        print("Downloaded picture with response code \(res.statusCode)")
                         if let imageData = data {
                             let image = UIImage(data: imageData)
                             self.articlesImage.image = image
@@ -54,8 +53,8 @@ class ArticlesContentController: UIViewController {
     }
     
     @IBAction func saveClick(_ sender: Any) {
-        let articleId = selectedArticle!.title.prefix(3) + selectedArticle!.url.suffix(5)
-        DbManager.dbManager.addArticle(article: [String(articleId): selectedArticle!])
+        DbManager.instance.insert(id: 3, title: selectedArticle!.title, author: selectedArticle!.author)
+        print("DATABASE: saved objects count after insert: )", DbManager.instance.read().count)
     }
     
 }

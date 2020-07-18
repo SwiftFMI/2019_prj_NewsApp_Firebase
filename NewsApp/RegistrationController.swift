@@ -15,7 +15,7 @@ class RegistrationController: UIViewController {
     @IBAction func register_click(_ sender: Any) {
         UsersManager.register(email: email.text!, password: password.text!) { (result: String) in
             DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "registerSegue", sender: sender)
+                self.performSegue(withIdentifier: Constants.Segue.registerSegue, sender: sender)
             }
         }
     }

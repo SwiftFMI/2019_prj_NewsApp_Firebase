@@ -185,7 +185,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Fdu-J7-G0P" kind="relationship" relationship="rootViewController" id="UXs-W2-FTh"/>
+                        <segue destination="m4k-4Z-Pra" kind="relationship" relationship="rootViewController" id="ZV3-El-xIZ"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cLP-H7-wYr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -234,7 +234,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="s3o-1Q-iSh"/>
                     </view>
-                    <navigationItem key="navigationItem" id="JR1-Pg-V4X"/>
                     <connections>
                         <outlet property="email" destination="8XK-94-kid" id="snF-WT-dEU"/>
                         <outlet property="password" destination="TZc-gq-xZE" id="yXk-hc-qtg"/>
@@ -295,7 +294,7 @@
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="hTd-Vr-LQj"/>
                     <navigationItem key="navigationItem" id="uSr-6t-Lui"/>
                     <connections>
-                        <outlet property="tableView" destination="BcX-BD-ar3" id="9d3-jR-fjW"/>
+                        <outlet property="tableView" destination="BcX-BD-ar3" id="pWp-2z-nnI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="778-bE-wgv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -361,6 +360,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="85o-1K-9ci"/>
                     </view>
+                    <navigationItem key="navigationItem" id="gnz-rt-TF3"/>
                     <connections>
                         <outlet property="confirmPassword" destination="7Rq-ed-EvR" id="38p-lw-PLR"/>
                         <outlet property="email" destination="raJ-rd-DvG" id="Rrj-xl-50m"/>
@@ -390,6 +390,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="vH3-40-MDA"/>
+        <segue reference="ZV3-El-xIZ"/>
     </inferredMetricsTieBreakers>
 </document>

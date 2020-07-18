@@ -21,8 +21,11 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     @IBAction func logout_click(_ sender: Any) {
+        UserDefaults.standard.set(false, forKey: Constants.UserDefaultsKeys.isUserLoggedIn)
+        UserDefaults.standard.synchronize()
+        
         UsersManager.logout()
-        self.performSegue(withIdentifier: "logoutSegue", sender: self)
+        self.performSegue(withIdentifier: Constants.Segue.logoutSegue, sender: self)
     }
     
     override func viewDidLoad() {
@@ -104,10 +107,9 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
             let session = URLSession(configuration: .default)
             let _ = session.dataTask(with: imageUrl) { (data, response, error) in
                 if let e = error {
-                    print("Error downloading cat picture: \(e)")
+                    print("Error downloading picture: \(e)")
                 } else {
                     if let res = response as? HTTPURLResponse {
-                        print("Downloaded picture with response code \(res.statusCode)")
                         if let imageData = data {
                             let image = UIImage(data: imageData)
                             cell.imageView?.clipsToBounds = true
@@ -119,7 +121,7 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
                         print("Couldn't get response code for some reason")
                     }
                 }
-                }.resume()
+            }.resume()
         }
         
         return cell
@@ -139,7 +141,7 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showContent",
+        if segue.identifier == Constants.Segue.showContentSegue,
             let destinationViewController = segue.destination as? ArticlesContentController {
             destinationViewController.selectedArticle = selectedArticle
         }
