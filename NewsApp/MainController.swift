@@ -1,4 +1,5 @@
 import UIKit
+import Network
 
 class MainController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
     
@@ -11,6 +12,11 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
     var filteredArticles: [Article] = []
     
     var selectedArticle: Article?
+    
+    // Internet connection
+    let monitor = NWPathMonitor()
+    let queue = DispatchQueue(label: "InternetConnectionMonitor")
+
 
     var isSearchBarEmpty: Bool {
         return searchController.searchBar.text?.isEmpty ?? true
@@ -31,22 +37,39 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        DataService.shared.getData { (result) in
-            switch result {
-                case .success(let articles) :
-                    for articleJson in articles {
-                        let article = Article(articleJson.title, articleJson.author, articleJson.description, articleJson.content, articleJson.urlToImage, articleJson.url, articleJson.publishedAt)
-                        self.articlesManager.articles.append(article)
-                        DbManager.instance.saveArticle(table: Constants.LocalSQLiteDatabase.downloadedTable, article: article)
+        monitor.pathUpdateHandler = { pathUpdateHandler in
+            if pathUpdateHandler.status == .satisfied {
+                print("Internet connection is on.")
+                DataService.shared.getData { (result) in
+                    switch result {
+                    case .success(let articles) :
+                        for articleJson in articles {
+                            let article = Article(articleJson.title, articleJson.author, articleJson.description, articleJson.content, articleJson.urlToImage, articleJson.url, articleJson.publishedAt)
+                            self.articlesManager.articles.append(article)
+                            DbManager.instance.saveArticle(table: Constants.LocalSQLiteDatabase.downloadedTable, article: article)
+                        }
+                    case .failure(let error):
+                        print(error)
                     }
-                case .failure(let error):
-                    print(error)
-            }
-            
-            DispatchQueue.main.sync {
-                self.tableView.reloadData()
+                    
+                    DispatchQueue.main.sync {
+                        self.tableView.reloadData()
+                    }
+                }
+            } else {
+                print("There's no internet connection.")
+                let downloadedArticles = DbManager.instance.getAllArticles(table: Constants.LocalSQLiteDatabase.downloadedTable)
+                for downloadedArticle in downloadedArticles {
+                    self.articlesManager.articles.append(downloadedArticle)
+                }
+                
+                DispatchQueue.main.sync {
+                    self.tableView.reloadData()
+                }
             }
         }
+        
+        monitor.start(queue: queue)
         
         setupSearchBar()
     }
