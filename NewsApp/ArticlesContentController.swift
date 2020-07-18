@@ -17,8 +17,8 @@ class ArticlesContentController: UIViewController {
     override func viewDidLoad() {        
         articlesTitle.text = selectedArticle?.title
         articlesTitle.adjustsFontSizeToFitWidth = true
-        articlesAuthor.text = selectedArticle?.author
-        articlesContent.text = selectedArticle?.content
+        articlesAuthor.text = selectedArticle?.author ?? "Description"
+        articlesContent.text = selectedArticle?.content ?? "Content"
         publishedAt.text = String(selectedArticle?.publishedAt.prefix(10) ?? "Published at" )
         
         if selectedArticle?.urlToImage != nil {
@@ -53,8 +53,7 @@ class ArticlesContentController: UIViewController {
     }
     
     @IBAction func saveClick(_ sender: Any) {
-        DbManager.instance.saveArticle(table: Constants.LocalSQLiteDatabase.likedTable, article: selectedArticle!)
-        print("DATABASE: saved objects count after insert: )", DbManager.instance.getAllArticles(table: Constants.LocalSQLiteDatabase.likedTable))
+        ArticlesManager.instance.saveArticle(articleType: Constants.ArticlesType.liked, article: selectedArticle!)
     }
     
 }

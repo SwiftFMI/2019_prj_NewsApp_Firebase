@@ -11,6 +11,9 @@ class DbManager {
     init() {
         db = openDatabase()
         
+//        dropTable("liked")
+//        dropTable("downloaded")
+        
         createTable(Constants.LocalSQLiteDatabase.createLikedTable)
         createTable(Constants.LocalSQLiteDatabase.createDownloadedTable)
     }
@@ -39,6 +42,20 @@ class DbManager {
             print("CREATE TABLE statement could not be prepared.")
         }
         sqlite3_finalize(createTableStatement)
+    }
+    
+    func dropTable(_ table: String) {
+        var dropTableStatement: OpaquePointer? = nil
+        if sqlite3_prepare_v2(db, "DROP TABLE " + table, -1, &dropTableStatement, nil) == SQLITE_OK {
+            if sqlite3_step(dropTableStatement) == SQLITE_DONE {
+                print("table deleted.")
+            } else {
+                print("table could not be deleted.")
+            }
+        } else {
+            print("DROP TABLE statement could not be prepared.")
+        }
+        sqlite3_finalize(dropTableStatement)
     }
     
     func saveArticle(table: String, article: Article) {
@@ -117,11 +134,11 @@ class DbManager {
         return result
     }
     
-    func deleteByID(id:Int) {
+    func deleteArticle(title: String) {
         let deleteStatementStirng = Constants.LocalSQLiteDatabase.deleteFromLiked
         var deleteStatement: OpaquePointer? = nil
         if sqlite3_prepare_v2(db, deleteStatementStirng, -1, &deleteStatement, nil) == SQLITE_OK {
-            sqlite3_bind_int(deleteStatement, 1, Int32(id))
+            sqlite3_bind_text(deleteStatement, 2, (title as NSString).utf8String, -1, nil)
             if sqlite3_step(deleteStatement) == SQLITE_DONE {
                 print("DATABASE: Successfully deleted row.")
             } else {

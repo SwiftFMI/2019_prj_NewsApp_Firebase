@@ -11,19 +11,24 @@ struct Constants {
         static let loginNavigationControllerId = "LoginNavigationController"
     }
     
+    struct Segue {
+        static let registerSegue = "registerSegue"
+        static let logoutSegue = "logoutSegue"
+        static let showContentSegue = "showContent"
+    }
+    
     struct Messages {
         
+    }
+    
+    struct ArticlesType {
+        static let liked = "liked"
+        static let downloaded = "downloaded"
     }
     
     struct URLs {
         static let apiUrl = "https://newsapi.org/v2/top-headlines?country=de&apiKey="
         static let apiKey = "710e1dac2cea4f8faf0b308acb22603a"
-    }
-    
-    struct Segue {
-        static let registerSegue = "registerSegue"
-        static let logoutSegue = "logoutSegue"
-        static let showContentSegue = "showContent"
     }
 
     struct UserDefaultsKeys {
@@ -43,7 +48,7 @@ struct Constants {
         static let insertIntoLiked = "INSERT INTO " + likedTable + "(title, author, content, description, url, urlToImage, publishedAt) VALUES (?, ?, ?, ?, ?, ?, ?);"
         static let insertIntoDownloaded = "INSERT INTO " + downloadedTable + "(title, author, content, description, url, urlToImage, publishedAt) VALUES  (?, ?, ?, ?, ?, ?, ?);"
         
-        static let deleteFromLiked = "DELETE FROM " + likedTable + " WHERE Id = ?;"
+        static let deleteFromLiked = "DELETE FROM " + likedTable + " WHERE title = ?;"
     }
     
 }
