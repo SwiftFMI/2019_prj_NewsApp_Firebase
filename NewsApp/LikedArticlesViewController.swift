@@ -1,8 +1,6 @@
 import UIKit
 
-class LikedArticlesViewController: UIViewController {
-
-    @IBOutlet weak var tableView: UITableView!
+class LikedArticlesViewController: UITableViewController {
     
     var selectedArticle: Article?
     
@@ -19,14 +17,13 @@ class LikedArticlesViewController: UIViewController {
         self.tableView.reloadData()
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("DATABASE: saved objects count on liked loading: )", likedArticles.count)
-//        return likedArticles.count
-        return 3
+        return likedArticles.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "normalCell", for: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "likedCell", for: indexPath)
         
         let currentArticle = likedArticles[indexPath.row]
         
@@ -38,8 +35,8 @@ class LikedArticlesViewController: UIViewController {
         
         cell.imageView?.image = UIImage.init(named: "Article")
         cell.accessoryType = .disclosureIndicator
-        cell.detailTextLabel?.text = "author"
-        cell.textLabel?.text = "title"
+        cell.detailTextLabel?.text = currentArticle.author
+        cell.textLabel?.text = currentArticle.title
         
         // Download image
         // TODO: Code duplication (ArticlesContentController)
@@ -70,9 +67,9 @@ class LikedArticlesViewController: UIViewController {
         return cell
     }
     
-//    func tableView(tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        selectedArticle = DbManager.dbManager.getArticleById(tableView.get)
-//    }
+    }
     
 //    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
 //        let favorite = UITableViewRowAction(style: .normal, title: "Delete") { action, index in

@@ -1,9 +1,7 @@
 import UIKit
 import Network
 
-class MainController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
-    
-    @IBOutlet weak var tableView: UITableView!
+class MainController: UITableViewController, UISearchResultsUpdating {
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -99,16 +97,16 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // TABLE VIEW
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {
             return filteredArticles.count
         }
         return articlesManager.articles.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Make cells reusables
-        let cell = tableView.dequeueReusableCell(withIdentifier: "normalCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "downloadedCell", for: indexPath)
         
         let currentArticle: Article
         
@@ -151,11 +149,11 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedArticle = articlesManager.articles[indexPath.row]
     }
     
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let favorite = UITableViewRowAction(style: .normal, title: "Save") { action, index in
             print("favorite button tapped")
         }
