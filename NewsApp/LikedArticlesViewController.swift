@@ -11,11 +11,8 @@ class LikedArticlesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.likedArticles = DbManager.instance.read()
+        self.likedArticles = DbManager.instance.getAllArticles(table: Constants.LocalSQLiteDatabase.likedTable)
         print("DATABASE: saved objects count on liked loading VIEW DID LOAD: )", likedArticles.count)
-        for a in likedArticles {
-            print("DATABASE content: ",  a.title)
-        }
         
         definesPresentationContext = true
         

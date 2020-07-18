@@ -37,6 +37,7 @@ class MainController: UIViewController, UITableViewDataSource, UITableViewDelega
                     for articleJson in articles {
                         let article = Article(articleJson.title, articleJson.author, articleJson.description, articleJson.content, articleJson.urlToImage, articleJson.url, articleJson.publishedAt)
                         self.articlesManager.articles.append(article)
+                        DbManager.instance.saveArticle(table: Constants.LocalSQLiteDatabase.downloadedTable, article: article)
                     }
                 case .failure(let error):
                     print(error)

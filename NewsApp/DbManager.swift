@@ -10,7 +10,9 @@ class DbManager {
     
     init() {
         db = openDatabase()
-        createTable()
+        
+        createTable(Constants.LocalSQLiteDatabase.createLikedTable)
+        createTable(Constants.LocalSQLiteDatabase.createDownloadedTable)
     }
     
     func openDatabase() -> OpaquePointer? {
@@ -25,14 +27,13 @@ class DbManager {
         }
     }
     
-    func createTable() {
-        let createTableString = "CREATE TABLE IF NOT EXISTS liked(Id INTEGER PRIMARY KEY, title TEXT, author TEXT);"
+    func createTable(_ createTableSqlStr: String) {
         var createTableStatement: OpaquePointer? = nil
-        if sqlite3_prepare_v2(db, createTableString, -1, &createTableStatement, nil) == SQLITE_OK {
+        if sqlite3_prepare_v2(db, createTableSqlStr, -1, &createTableStatement, nil) == SQLITE_OK {
             if sqlite3_step(createTableStatement) == SQLITE_DONE {
-                print("liked table created.")
+                print("table created.")
             } else {
-                print("liked table could not be created.")
+                print("table could not be created.")
             }
         } else {
             print("CREATE TABLE statement could not be prepared.")
@@ -40,22 +41,37 @@ class DbManager {
         sqlite3_finalize(createTableStatement)
     }
     
-    
-    func insert(id: Int, title: String, author: String) {
-//        let persons = read()
-//        for p in persons {
-//            if p.id == id {
-//                print("This id already exists")
-//                return
-//            }
-//        }
+    func saveArticle(table: String, article: Article) {
+        // Check if article is already saved
+        let savedArticles = getAllArticles(table: table)
+        for savedArticle in savedArticles {
+            if savedArticle.title == article.title {
+                print("This article is already saved")
+                return
+            }
+        }
         
-        let insertStatementString = "INSERT INTO liked (Id, title, author) VALUES (?, ?, ?);"
+        let insertStatementString: String
+
+        switch table {
+            case Constants.LocalSQLiteDatabase.likedTable:
+                insertStatementString = Constants.LocalSQLiteDatabase.insertIntoLiked
+            case Constants.LocalSQLiteDatabase.downloadedTable:
+                insertStatementString = Constants.LocalSQLiteDatabase.insertIntoDownloaded
+            default:
+                insertStatementString = ""
+        }
+        
         var insertStatement: OpaquePointer? = nil
-        if sqlite3_prepare_v2(db, insertStatementString, -1, &insertStatement, nil) == SQLITE_OK {
-            sqlite3_bind_int(insertStatement, 1, Int32(id))
-            sqlite3_bind_text(insertStatement, 2, (title as NSString).utf8String, -1, nil)
-            sqlite3_bind_text(insertStatement, 3, (author as NSString).utf8String, -1, nil)
+        let state = sqlite3_prepare_v2(db, insertStatementString, -1, &insertStatement, nil)
+        if state == SQLITE_OK {
+            sqlite3_bind_text(insertStatement, 2, (article.title as NSString).utf8String, -1, nil)
+            sqlite3_bind_text(insertStatement, 3, (article.author as NSString).utf8String, -1, nil)
+            sqlite3_bind_text(insertStatement, 4, (article.content as NSString).utf8String, -1, nil)
+            sqlite3_bind_text(insertStatement, 5, (article.description as NSString).utf8String, -1, nil)
+            sqlite3_bind_text(insertStatement, 6, (article.url as NSString).utf8String, -1, nil)
+            sqlite3_bind_text(insertStatement, 7, (article.urlToImage as NSString).utf8String, -1, nil)
+            sqlite3_bind_text(insertStatement, 8, (article.publishedAt as NSString).utf8String, -1, nil)
             
             if sqlite3_step(insertStatement) == SQLITE_DONE {
                 print("DATABASE: Successfully inserted row.")
@@ -63,33 +79,46 @@ class DbManager {
                 print("DATABASE: Could not insert row.")
             }
         } else {
-            print("DATABASE: INSERT statement could not be prepared.")
+            print("DATABASE: INSERT statement could not be prepared: ")
         }
         sqlite3_finalize(insertStatement)
     }
     
-    func read() -> [Article] {
-        let queryStatementString = "SELECT * FROM liked;"
+    func getAllArticles(table: String) -> [Article] {
+        let selectStatementStr: String
+        
+        switch table {
+            case Constants.LocalSQLiteDatabase.likedTable:
+                selectStatementStr = Constants.LocalSQLiteDatabase.selectLiked
+            case Constants.LocalSQLiteDatabase.downloadedTable:
+                selectStatementStr = Constants.LocalSQLiteDatabase.selectDownloaded
+            default:
+                selectStatementStr = ""
+        }
+        
         var queryStatement: OpaquePointer? = nil
-        var psns : [Article] = []
-        if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) == SQLITE_OK {
+        var result : [Article] = []
+        if sqlite3_prepare_v2(db, selectStatementStr, -1, &queryStatement, nil) == SQLITE_OK {
             while sqlite3_step(queryStatement) == SQLITE_ROW {
-                let id = sqlite3_column_int(queryStatement, 0)
-                let title = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
-                let author = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
-                psns.append(Article(title, author, "", "", "", "", ""))
-                print("Query Result:")
-                print("\(id) | \(title) | \(author)")
+                let title = String(describing: String(cString: sqlite3_column_text(queryStatement, 2)))
+                let author = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
+                let content = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
+                let description = String(describing: String(cString: sqlite3_column_text(queryStatement, 5)))
+                let url = String(describing: String(cString: sqlite3_column_text(queryStatement, 6)))
+                let urlToImage = String(describing: String(cString: sqlite3_column_text(queryStatement, 7)))
+//                let publishedAt = String(describing: String(cString: sqlite3_column_text(queryStatement, 8)))
+
+                result.append(Article(title, author, content, description, url, urlToImage, ""))
             }
         } else {
             print("DATABASE: SELECT statement could not be prepared")
         }
         sqlite3_finalize(queryStatement)
-        return psns
+        return result
     }
     
     func deleteByID(id:Int) {
-        let deleteStatementStirng = "DELETE FROM liked WHERE Id = ?;"
+        let deleteStatementStirng = Constants.LocalSQLiteDatabase.deleteFromLiked
         var deleteStatement: OpaquePointer? = nil
         if sqlite3_prepare_v2(db, deleteStatementStirng, -1, &deleteStatement, nil) == SQLITE_OK {
             sqlite3_bind_int(deleteStatement, 1, Int32(id))

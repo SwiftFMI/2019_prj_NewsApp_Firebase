@@ -30,4 +30,20 @@ struct Constants {
         static let isUserLoggedIn = "isUserLoggedIn"
     }
     
+    struct LocalSQLiteDatabase {
+        static let likedTable = "liked"
+        static let downloadedTable = "downloaded"
+        
+        static let createLikedTable = "CREATE TABLE IF NOT EXISTS " + likedTable + "(Id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, author TEXT, content TEXT, description TEXT, url TEXT, urlToImage TEXT, publishedAt TEXT);"
+        static let createDownloadedTable = "CREATE TABLE IF NOT EXISTS " + downloadedTable + "(Id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, author TEXT, content TEXT, description TEXT, url TEXT, urlToImage TEXT, publishedAt TEXT);"
+        
+        static let selectLiked = "SELECT * FROM " + likedTable
+        static let selectDownloaded = "SELECT * FROM " + downloadedTable
+        
+        static let insertIntoLiked = "INSERT INTO " + likedTable + "(title, author, content, description, url, urlToImage, publishedAt) VALUES (?, ?, ?, ?, ?, ?, ?);"
+        static let insertIntoDownloaded = "INSERT INTO " + downloadedTable + "(title, author, content, description, url, urlToImage, publishedAt) VALUES  (?, ?, ?, ?, ?, ?, ?);"
+        
+        static let deleteFromLiked = "DELETE FROM " + likedTable + " WHERE Id = ?;"
+    }
+    
 }

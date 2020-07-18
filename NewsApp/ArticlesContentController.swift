@@ -53,8 +53,8 @@ class ArticlesContentController: UIViewController {
     }
     
     @IBAction func saveClick(_ sender: Any) {
-        DbManager.instance.insert(id: 3, title: selectedArticle!.title, author: selectedArticle!.author)
-        print("DATABASE: saved objects count after insert: )", DbManager.instance.read().count)
+        DbManager.instance.saveArticle(table: Constants.LocalSQLiteDatabase.likedTable, article: selectedArticle!)
+        print("DATABASE: saved objects count after insert: )", DbManager.instance.getAllArticles(table: Constants.LocalSQLiteDatabase.likedTable))
     }
     
 }
