@@ -221,7 +221,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="m4k-4Z-Pra" kind="relationship" relationship="rootViewController" id="ZV3-El-xIZ"/>
+                        <segue destination="Fdu-J7-G0P" kind="relationship" relationship="rootViewController" id="BQn-u5-i4m"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cLP-H7-wYr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -270,6 +270,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="s3o-1Q-iSh"/>
                     </view>
+                    <navigationItem key="navigationItem" id="xjQ-ZE-85z"/>
                     <connections>
                         <outlet property="email" destination="8XK-94-kid" id="snF-WT-dEU"/>
                         <outlet property="password" destination="TZc-gq-xZE" id="yXk-hc-qtg"/>
@@ -319,13 +320,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Rq-ed-EvR">
-                                <rect key="frame" x="20" y="407" width="374" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sfx-io-qWg">
                                 <rect key="frame" x="20" y="460" width="374" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -340,7 +334,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="gnz-rt-TF3"/>
                     <connections>
-                        <outlet property="confirmPassword" destination="7Rq-ed-EvR" id="38p-lw-PLR"/>
                         <outlet property="email" destination="raJ-rd-DvG" id="Rrj-xl-50m"/>
                         <outlet property="password" destination="m1U-yc-1tb" id="qYV-G5-1Ft"/>
                     </connections>
@@ -371,7 +364,6 @@
         <image name="Article" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZV3-El-xIZ"/>
         <segue reference="LEK-16-ZQx"/>
     </inferredMetricsTieBreakers>
 </document>

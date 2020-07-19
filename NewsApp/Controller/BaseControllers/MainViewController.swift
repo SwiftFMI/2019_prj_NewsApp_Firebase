@@ -4,6 +4,8 @@ class MainViewController: UITableViewController {
 
     let searchController = UISearchController(searchResultsController: nil)
     
+    var signOutButton: UIBarButtonItem?
+    
     var articles: [Article] = []
     
     var filteredArticles: [Article] = []
@@ -73,11 +75,6 @@ class MainViewController: UITableViewController {
             }
         }.resume()
         
-//        let imageData = DataService.instance.downloadImage(imageUrl: imageUrl)
-//        let image = UIImage(data: imageData!)
-//        cell.imageView?.clipsToBounds = true
-//        cell.imageView?.image = image
-        
         return cell
     }
     
@@ -89,15 +86,6 @@ class MainViewController: UITableViewController {
         }
     }
     
-//    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-//        let favorite = UITableViewRowAction(style: .normal, title: "Save") { action, index in
-//            ArticlesManager.instance.saveArticle(articleType: Constants.LocalSQLiteDatabase.likedTable, article: self.selectedArticle!)
-//        }
-//        favorite.backgroundColor = .orange
-//        
-//        return [favorite]
-//    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.Segue.showContentSegue,
             let destinationViewController = segue.destination as? ArticlesContentController {
@@ -106,14 +94,15 @@ class MainViewController: UITableViewController {
     }
     
     // LOG OUT
-    @IBAction func logout_click(_ sender: Any) {
+    @objc func signOut(_ sender: Any) {
         UserDefaults.standard.set(false, forKey: Constants.UserDefaultsKeys.isUserLoggedIn)
         UserDefaults.standard.synchronize()
         
         UsersManager.logout()
-        self.performSegue(withIdentifier: Constants.Segue.logoutSegue, sender: self)
+        let storyboard = UIStoryboard(name: Constants.StoryBoardNames.main, bundle: nil)
+        let loginNavigation = storyboard.instantiateViewController(withIdentifier: Constants.ViewControllerIdentifiers.loginNavigationControllerId)
+        (UIApplication.shared.delegate as? AppDelegate)?.changeRootViewController(loginNavigation)
     }
-
 }
 
 extension MainViewController: UISearchResultsUpdating {
@@ -135,6 +124,10 @@ extension MainViewController: UISearchResultsUpdating {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
         navigationItem.searchController = searchController
+        
+        signOutButton = UIBarButtonItem(title: "Sign out", style: UIBarButtonItem.Style.plain, target: self, action: #selector(signOut))
+        navigationItem.rightBarButtonItem = signOutButton
+        
         definesPresentationContext = true
     }
 }

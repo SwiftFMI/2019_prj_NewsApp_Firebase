@@ -5,9 +5,7 @@ class RegistrationController: UIViewController {
     @IBOutlet weak var email: UITextField!
     
     @IBOutlet weak var password: UITextField!
-    
-    @IBOutlet weak var confirmPassword: UITextField!
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
     }

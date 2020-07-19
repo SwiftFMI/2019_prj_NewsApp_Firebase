@@ -13,6 +13,9 @@ class LikedArticlesViewController: MainViewController {
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let favorite = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
             ArticlesManager.instance.deleteArticle(articleIdx: indexPath.row)
+            
+            self.articles.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
         }
         favorite.backgroundColor = .orange
 

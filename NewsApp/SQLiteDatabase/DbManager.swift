@@ -134,11 +134,27 @@ class DbManager {
         return result
     }
     
+//    func getLikedArticleByTitle(title: String) -> Int {
+//        let selectStatementStr = Constants.LocalSQLiteDatabase.selectByTitleFromLiked
+//
+//        var queryStatement: OpaquePointer? = nil
+//        var slectedArticleId: Int
+//        if sqlite3_prepare_v2(db, selectStatementStr, -1, &queryStatement, nil) == SQLITE_OK {
+//            while sqlite3_step(queryStatement) == SQLITE_ROW {
+//                slectedArticleId = Int(sqlite3_column_int(queryStatement, 0))
+//            }
+//        } else {
+//            print("DATABASE: SELECT statement could not be prepared")
+//        }
+//        sqlite3_finalize(queryStatement)
+//        return slectedArticleId
+//    }
+    
     func deleteArticle(title: String) {
         let deleteStatementStirng = Constants.LocalSQLiteDatabase.deleteFromLiked
         var deleteStatement: OpaquePointer? = nil
         if sqlite3_prepare_v2(db, deleteStatementStirng, -1, &deleteStatement, nil) == SQLITE_OK {
-            sqlite3_bind_text(deleteStatement, 2, (title as NSString).utf8String, -1, nil)
+            sqlite3_bind_text(deleteStatement, 1, (title as NSString).utf8String, -1, nil)
             if sqlite3_step(deleteStatement) == SQLITE_DONE {
                 print("DATABASE: Successfully deleted row.")
             } else {
@@ -148,5 +164,6 @@ class DbManager {
             print("DATABASE: DELETE statement could not be prepared")
         }
         sqlite3_finalize(deleteStatement)
+        print(getAllArticles(table: Constants.LocalSQLiteDatabase.likedTable).count)
     }
 }
