@@ -21,8 +21,8 @@ class ArticlesContentController: UIViewController {
         articlesContent.text = selectedArticle?.content ?? "Content"
         publishedAt.text = String(selectedArticle?.publishedAt.prefix(10) ?? "Published at" )
         
+        // TODO: move to DataService
         if selectedArticle?.urlToImage != nil {
-            // TODO: code duplication
             let imageUrl = URL(string: selectedArticle!.urlToImage)!
             let session = URLSession(configuration: .default)
             let _ = session.dataTask(with: imageUrl) { (data, response, error) in

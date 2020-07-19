@@ -9,6 +9,7 @@ struct Constants {
     struct ViewControllerIdentifiers {
         static let mainTabBarId = "MainTabBarNavigationController"
         static let loginNavigationControllerId = "LoginNavigationController"
+        static let articlesContentControllerId = "ArticlesContentController"
     }
     
     struct Segue {

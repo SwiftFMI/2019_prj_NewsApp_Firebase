@@ -84,13 +84,10 @@ class MainViewController: UITableViewController {
         } else {
             selectedArticle = articles[indexPath.row]
         }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constants.Segue.showContentSegue,
-            let destinationViewController = segue.destination as? ArticlesContentController {
-            destinationViewController.selectedArticle = selectedArticle
-        }
+        
+        let contentController = storyboard!.instantiateViewController(withIdentifier: Constants.ViewControllerIdentifiers.articlesContentControllerId) as? ArticlesContentController
+        contentController?.selectedArticle = selectedArticle
+        navigationController?.pushViewController(contentController!, animated: true)
     }
     
     // LOG OUT
