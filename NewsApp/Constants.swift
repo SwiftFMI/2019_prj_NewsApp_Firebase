@@ -30,7 +30,7 @@ struct Constants {
     
     struct URLs {
         static let basicApiUrl = "https://newsapi.org/"
-        static let apiUrl = "https://newsapi.org/v2/top-headlines?country=eu&apiKey="
+        static let apiUrl = "https://newsapi.org/v2/top-headlines?country=us&apiKey="
         static let apiKey = "710e1dac2cea4f8faf0b308acb22603a"
     }
     
