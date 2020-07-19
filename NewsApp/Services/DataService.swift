@@ -2,9 +2,9 @@ import UIKit
 
 class DataService {
     
-    static let shared = DataService()
+    static let instance = DataService()
     
-    func getData(completion: @escaping (Result<[ArticleJson], Error>) -> Void) {
+    func downloadData(completion: @escaping (Result<[ArticleJson], Error>) -> Void) {
         let fullUrl = URL(string: Constants.URLs.apiUrl + Constants.URLs.apiKey)
         
         URLSession.shared.dataTask(with: fullUrl!) { (data, response, error) in
@@ -20,7 +20,5 @@ class DataService {
                 completion(.failure(serializationError))    
             }
         }.resume()
-        
     }
-
 }

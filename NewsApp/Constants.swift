@@ -27,8 +27,18 @@ struct Constants {
     }
     
     struct URLs {
+        static let basicApiUrl = "https://newsapi.org/"
         static let apiUrl = "https://newsapi.org/v2/top-headlines?country=de&apiKey="
         static let apiKey = "710e1dac2cea4f8faf0b308acb22603a"
+    }
+    
+    struct ArticlesDefaultValues {
+        static let author = "Unknown author"
+        static let content = "No content"
+        static let description = "No description"
+        static let url = "https://newsapi.org/"
+        static let urlToImage = "https://cdn.dribbble.com/users/1359053/screenshots/3719173/icon5.png"
+        static let publishedAt = "--/--/----"
     }
 
     struct UserDefaultsKeys {

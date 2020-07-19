@@ -27,16 +27,16 @@
             </objects>
             <point key="canvasLocation" x="2029" y="137"/>
         </scene>
-        <!--Main Controller-->
+        <!--All Articles View Controller-->
         <scene sceneID="uj0-sC-kJE">
             <objects>
-                <tableViewController id="Ozm-YL-NgY" customClass="MainController" customModule="NewsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Ozm-YL-NgY" customClass="AllArticlesViewController" customModule="NewsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="kx7-sO-kUX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="downloadedCell" textLabel="jWl-Oy-Scw" detailTextLabel="8vR-jK-7oD" imageView="PDL-dl-OmG" style="IBUITableViewCellStyleSubtitle" id="3wh-yt-0pO">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="articleCell" textLabel="jWl-Oy-Scw" detailTextLabel="8vR-jK-7oD" imageView="PDL-dl-OmG" style="IBUITableViewCellStyleSubtitle" id="3wh-yt-0pO">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3wh-yt-0pO" id="z5O-9V-J0T">
@@ -88,7 +88,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="likedCell" textLabel="Lsy-PL-ise" detailTextLabel="raC-0C-Fer" imageView="73I-J9-S1d" style="IBUITableViewCellStyleSubtitle" id="OT8-FY-yyE" userLabel="Liked">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="articleCell" textLabel="Lsy-PL-ise" detailTextLabel="raC-0C-Fer" imageView="73I-J9-S1d" style="IBUITableViewCellStyleSubtitle" id="OT8-FY-yyE" userLabel="Liked">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OT8-FY-yyE" id="M05-Mf-AXh">

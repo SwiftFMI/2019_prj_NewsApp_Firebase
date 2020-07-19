@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		8B06E3D924B7CB0400EE2113 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B06E3D824B7CB0400EE2113 /* GoogleService-Info.plist */; };
 		8B1B3ABF24B3D0BE0054C674 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1B3ABE24B3D0BE0054C674 /* AppDelegate.swift */; };
-		8B1B3AC124B3D0BE0054C674 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1B3AC024B3D0BE0054C674 /* MainController.swift */; };
+		8B1B3AC124B3D0BE0054C674 /* AllArticlesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1B3AC024B3D0BE0054C674 /* AllArticlesViewController.swift */; };
 		8B1B3AC424B3D0BE0054C674 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B1B3AC224B3D0BE0054C674 /* Main.storyboard */; };
 		8B1B3AC624B3D0C00054C674 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B1B3AC524B3D0C00054C674 /* Assets.xcassets */; };
 		8B1B3AC924B3D0C00054C674 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B1B3AC724B3D0C00054C674 /* LaunchScreen.storyboard */; };
@@ -21,6 +21,7 @@
 		8BA6A3E924C0E90500D198CA /* DbManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA6A3E824C0E90500D198CA /* DbManager.swift */; };
 		8BA6A3EB24C117BE00D198CA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA6A3EA24C117BE00D198CA /* Constants.swift */; };
 		8BA6A3ED24C1199500D198CA /* LikedArticlesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA6A3EC24C1199500D198CA /* LikedArticlesViewController.swift */; };
+		8BA77AC024C44850007474C7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA77ABF24C44850007474C7 /* MainViewController.swift */; };
 		8BAB342524B77620006F26E4 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB342424B77620006F26E4 /* DataService.swift */; };
 		8BAB342724B7906C006F26E4 /* Gist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB342624B7906C006F26E4 /* Gist.swift */; };
 		8BF8C14624B7D3C200BA0A10 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF8C14524B7D3C200BA0A10 /* RegistrationController.swift */; };
@@ -33,7 +34,7 @@
 		8B06E3D824B7CB0400EE2113 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8B1B3ABB24B3D0BE0054C674 /* NewsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B1B3ABE24B3D0BE0054C674 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8B1B3AC024B3D0BE0054C674 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		8B1B3AC024B3D0BE0054C674 /* AllArticlesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllArticlesViewController.swift; sourceTree = "<group>"; };
 		8B1B3AC324B3D0BE0054C674 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8B1B3AC524B3D0C00054C674 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B1B3AC824B3D0C00054C674 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +48,7 @@
 		8BA6A3E824C0E90500D198CA /* DbManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbManager.swift; sourceTree = "<group>"; };
 		8BA6A3EA24C117BE00D198CA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8BA6A3EC24C1199500D198CA /* LikedArticlesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedArticlesViewController.swift; sourceTree = "<group>"; };
+		8BA77ABF24C44850007474C7 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		8BAB342424B77620006F26E4 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		8BAB342624B7906C006F26E4 /* Gist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gist.swift; sourceTree = "<group>"; };
 		8BF8C14524B7D3C200BA0A10 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
@@ -97,28 +99,77 @@
 		8B1B3ABD24B3D0BE0054C674 /* NewsApp */ = {
 			isa = PBXGroup;
 			children = (
-				8B1B3AC024B3D0BE0054C674 /* MainController.swift */,
-				8B1BD9BE24B504DC008AE114 /* ArticlesContentController.swift */,
-				8BF8C14524B7D3C200BA0A10 /* RegistrationController.swift */,
-				8BF8C14724B7D43200BA0A10 /* LoginController.swift */,
+				8B06E3D824B7CB0400EE2113 /* GoogleService-Info.plist */,
 				8BA6A3EA24C117BE00D198CA /* Constants.swift */,
 				8B585EBB24B7CF8000912532 /* NewsApp.entitlements */,
 				8B1B3ABE24B3D0BE0054C674 /* AppDelegate.swift */,
-				8B1BD9C224B524CE008AE114 /* ArticlesManager.swift */,
 				8B1B3AC224B3D0BE0054C674 /* Main.storyboard */,
 				8B1B3AC524B3D0C00054C674 /* Assets.xcassets */,
 				8B1B3AC724B3D0C00054C674 /* LaunchScreen.storyboard */,
 				8B1B3ACA24B3D0C00054C674 /* Info.plist */,
-				8B1BD9C024B522C2008AE114 /* Article.swift */,
-				8BAB342424B77620006F26E4 /* DataService.swift */,
-				8BAB342624B7906C006F26E4 /* Gist.swift */,
-				8B06E3D824B7CB0400EE2113 /* GoogleService-Info.plist */,
-				8B642C9B24B7DBE20014C2DE /* User.swift */,
-				8B642C9D24B7DC830014C2DE /* UsersManager.swift */,
-				8BA6A3E824C0E90500D198CA /* DbManager.swift */,
-				8BA6A3EC24C1199500D198CA /* LikedArticlesViewController.swift */,
+				8BA77ABA24C4441A007474C7 /* Controller */,
+				8BA77ABB24C4443D007474C7 /* DataManager */,
+				8BA77ABE24C444D0007474C7 /* Model */,
+				8BA77ABC24C44481007474C7 /* Services */,
+				8BA77ABD24C444A4007474C7 /* SQLiteDatabase */,
 			);
 			path = NewsApp;
+			sourceTree = "<group>";
+		};
+		8BA77ABA24C4441A007474C7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8B1B3AC024B3D0BE0054C674 /* AllArticlesViewController.swift */,
+				8BA6A3EC24C1199500D198CA /* LikedArticlesViewController.swift */,
+				8B1BD9BE24B504DC008AE114 /* ArticlesContentController.swift */,
+				8BF8C14524B7D3C200BA0A10 /* RegistrationController.swift */,
+				8BF8C14724B7D43200BA0A10 /* LoginController.swift */,
+				8BA77AC124C4514E007474C7 /* BaseControllers */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8BA77ABB24C4443D007474C7 /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				8B1BD9C224B524CE008AE114 /* ArticlesManager.swift */,
+				8B642C9D24B7DC830014C2DE /* UsersManager.swift */,
+			);
+			path = DataManager;
+			sourceTree = "<group>";
+		};
+		8BA77ABC24C44481007474C7 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				8BAB342424B77620006F26E4 /* DataService.swift */,
+				8BAB342624B7906C006F26E4 /* Gist.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		8BA77ABD24C444A4007474C7 /* SQLiteDatabase */ = {
+			isa = PBXGroup;
+			children = (
+				8BA6A3E824C0E90500D198CA /* DbManager.swift */,
+			);
+			path = SQLiteDatabase;
+			sourceTree = "<group>";
+		};
+		8BA77ABE24C444D0007474C7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8B1BD9C024B522C2008AE114 /* Article.swift */,
+				8B642C9B24B7DBE20014C2DE /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8BA77AC124C4514E007474C7 /* BaseControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8BA77ABF24C44850007474C7 /* MainViewController.swift */,
+			);
+			path = BaseControllers;
 			sourceTree = "<group>";
 		};
 		9E232C2330F9C09F803A1E45 /* Frameworks */ = {
@@ -259,7 +310,8 @@
 				8B642C9E24B7DC830014C2DE /* UsersManager.swift in Sources */,
 				8BA6A3EB24C117BE00D198CA /* Constants.swift in Sources */,
 				8BAB342524B77620006F26E4 /* DataService.swift in Sources */,
-				8B1B3AC124B3D0BE0054C674 /* MainController.swift in Sources */,
+				8BA77AC024C44850007474C7 /* MainViewController.swift in Sources */,
+				8B1B3AC124B3D0BE0054C674 /* AllArticlesViewController.swift in Sources */,
 				8B1B3ABF24B3D0BE0054C674 /* AppDelegate.swift in Sources */,
 				8BAB342724B7906C006F26E4 /* Gist.swift in Sources */,
 				8B642C9C24B7DBE20014C2DE /* User.swift in Sources */,
