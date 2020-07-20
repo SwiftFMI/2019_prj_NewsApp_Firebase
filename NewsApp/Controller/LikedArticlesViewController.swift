@@ -6,7 +6,10 @@ class LikedArticlesViewController: MainViewController {
         super.viewDidLoad()
         
         self.articles = ArticlesManager.instance.likedArticles
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.articles = ArticlesManager.instance.likedArticles
         self.tableView.reloadData()
     }
     

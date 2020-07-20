@@ -57,12 +57,10 @@ struct Constants {
         static let selectLiked = "SELECT * FROM " + likedTable
         static let selectDownloaded = "SELECT * FROM " + downloadedTable
         
-        static let selectByTitleFromLiked = "SELECT * FROM " + likedTable + " WHERE title = ?;"
-        
         static let insertIntoLiked = "INSERT INTO " + likedTable + "(title, author, content, description, url, urlToImage, publishedAt) VALUES (?, ?, ?, ?, ?, ?, ?);"
         static let insertIntoDownloaded = "INSERT INTO " + downloadedTable + "(title, author, content, description, url, urlToImage, publishedAt) VALUES  (?, ?, ?, ?, ?, ?, ?);"
         
-        static let deleteFromLiked = "DELETE FROM " + likedTable + " WHERE Id = ?;"
+        static let deleteFromLiked = "DELETE FROM " + likedTable + " WHERE title = (?);"
     }
     
 }

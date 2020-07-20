@@ -12,7 +12,6 @@ class DataService {
                 completion(.failure(error!))
                 return
             }
-            
             do {
                 let gist = try JSONDecoder().decode(Gist.self, from: validData)
                 completion(.success(gist.articles))

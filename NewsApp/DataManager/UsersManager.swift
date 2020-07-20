@@ -14,7 +14,6 @@ class UsersManager: NSObject {
     static func login(email: String, password: String, completion: @escaping (_ success: Bool) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
             if let error = error {
-                print(error.localizedDescription)
                 completion(false)
             } else {
                 completion(true)
@@ -31,9 +30,9 @@ class UsersManager: NSObject {
             addUser(email: email)
             login(email: email, password: password, completion: { (success: Bool) in
                 if success {
-                    print("Loging successfull after account creation")
+                    print("Login successfull")
                 } else {
-                    print("Loging unsuccessfull after account creation")
+                    print("Could not log in")
                 }
             })
             completion("")

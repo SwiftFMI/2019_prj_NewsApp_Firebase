@@ -14,7 +14,7 @@ class MainViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         setupSearchBar()
     }
     
@@ -31,10 +31,7 @@ class MainViewController: UITableViewController {
     // TABLE VIEW
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isFiltering {
-            return filteredArticles.count
-        }
-        return articles.count
+        return isFiltering ? filteredArticles.count : articles.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -61,7 +58,7 @@ class MainViewController: UITableViewController {
             if let e = error {
                 print("Error downloading picture: \(e)")
             } else {
-                if let res = response as? HTTPURLResponse {
+                if (response as? HTTPURLResponse) != nil {
                     if let imageData = data {
                         let image = UIImage(data: imageData)
                         cell.imageView?.clipsToBounds = true
@@ -110,7 +107,7 @@ extension MainViewController: UISearchResultsUpdating {
     }
     
     func filterContentForSearchText(_ searchText: String) {
-        filteredArticles = ArticlesManager.instance.downloadedArticles.filter { (article: Article) -> Bool in
+        filteredArticles = articles.filter { (article: Article) -> Bool in
             return article.title.lowercased().contains(searchText.lowercased())
         }
         tableView.reloadData()

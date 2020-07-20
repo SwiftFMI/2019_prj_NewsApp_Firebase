@@ -19,7 +19,6 @@ class ArticlesContentController: UIViewController {
         articlesTitle.adjustsFontSizeToFitWidth = true
         articlesAuthor.text = selectedArticle?.author ?? "Description"
         articlesContent.text = selectedArticle?.content ?? "Content"
-        publishedAt.text = String(selectedArticle?.publishedAt.prefix(10) ?? "Published at" )
         
         // TODO: move to DataService
         if selectedArticle?.urlToImage != nil {

@@ -11,7 +11,6 @@ struct ArticleJson : Codable{
     var description: String
     var url: String
     var urlToImage: String
-    var publishedAt: String
     
     init(from decoder: Decoder) throws {
         // this container will hold key-value pairs
@@ -24,6 +23,5 @@ struct ArticleJson : Codable{
         self.description = try container.decodeIfPresent(String.self, forKey: .description) ?? Constants.ArticlesDefaultValues.description
         self.url = try container.decodeIfPresent(String.self, forKey: .url) ?? Constants.ArticlesDefaultValues.url
         self.urlToImage = try container.decodeIfPresent(String.self, forKey: .urlToImage) ?? Constants.ArticlesDefaultValues.urlToImage
-        self.publishedAt = try container.decodeIfPresent(String.self, forKey: .publishedAt) ?? Constants.ArticlesDefaultValues.publishedAt
     }
 }
